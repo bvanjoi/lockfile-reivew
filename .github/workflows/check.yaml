@@ -1,0 +1,29 @@
+name: check
+
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - "**"
+
+jobs:
+  check:
+    name: Node binding test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install dependencies && and build lib
+        run: |
+          node -e "console.log(process.arch)"  
+          npm install -g pnpm@7.25.0
+          pnpm -v
+          pnpm install
+          pnpm build
+          pnpm test

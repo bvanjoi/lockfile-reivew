@@ -1,0 +1,37 @@
+{
+  "name": "lockfile-review",
+  "types": "./lib/index.d.ts",
+  "version": "0.0.2",
+  "bin": {
+    "lr": "bin.js",
+    "lockfile-review": "bin.js"
+  },
+  "files": [
+    "lib",
+    "bin.js"
+  ],
+  "scripts": {
+    "build": "rm -rf lib *.tsbuildinfo && tsc -p tsconfig.build.json",
+    "dev": "rm -rf lib *.tsbuildinfo && tsc -w -p tsconfig.build.json",
+    "test": "npm run build && uvu -r tsm ./tests/"
+  },
+  "dependencies": {
+    "semver": "7.3.8",
+    "js-yaml": "4.1.0",
+    "chalk": "4",
+    "@pnpm/types": "8.10.0"
+  },
+  "devDependencies": {
+    "lockfile-review": "link:.",
+    "@types/semver": "7.3.13",
+    "typescript": "4.9.5",
+    "@types/js-yaml": "4.0.5",
+    "@pnpm/lockfile-types": "4.3.6",
+    "tsm": "2.3.0",
+    "@types/node": "16.11.7",
+    "uvu": "0.5.6"
+  },
+  "exports": {
+    ".": "./lib/index.js"
+  }
+}
