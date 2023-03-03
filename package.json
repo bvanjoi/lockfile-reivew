@@ -1,7 +1,7 @@
 {
   "name": "lockfile-review",
   "types": "./lib/index.d.ts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "bin": {
     "lr": "bin.js",
     "lockfile-review": "bin.js"
