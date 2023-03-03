@@ -38,6 +38,22 @@ test('should works for modified', async () => {
   expect(lockfile2.whoImportThisPackage(deleted[0])).toBe([['packages/b', '/react@18.0.0']])
 })
 
+test('should works diff importers and pnpm-lock versions', async () => {
+  const lockfile3 = await load(path.resolve(__dirname, './fixture/case3.yaml'));
+  const lockfile4 = await load(path.resolve(__dirname, './fixture/case4.yaml'));
+  const diff = diffGraph(lockfile3, lockfile4);
+  {
+    const { added, deleted } = diff.importers
+    expect(added.length).toBe(2);
+    expect(deleted.length).toBe(3);
+  }
+  {
+    const { added, deleted } = diff.packages;
+    expect(added.length).toBe(1);
+    expect(deleted.length).toBe(0);
+  }
+})
+
 test.run();
 
 function expect(value: any) {

@@ -14,17 +14,7 @@ function resolve(base: string, relative: string): string {
       _base.push(current)
     }
   }
-  const result: string[] = [];
-  for (const current of _base) {
-    if (current === '.') {
-      continue;
-    } else if (current === '..') {
-      result.pop()
-    } else if (current.length > 0) {
-      result.push(current)
-    }
-  }
-  return result.join('/');
+  return _base.join('/');
 }
 
 export function createBuilder<
@@ -106,9 +96,9 @@ export function createBuilder<
           parent.links.add(child)
           child.parents.add(parent)
         } else {
-          const child = importers.get(resolved)!;
-          parent.links.add(child)
-          child.parents.add(parent)
+          // const child = importers.get(resolved)!;
+          // parent.links.add(child)
+          // child.parents.add(parent)
         }
       })
       if (step.links.length > 0) {
@@ -141,9 +131,10 @@ export function createBuilder<
           importer.links.add(child)
           child.parents.add(importer)
         } else {
-          const child = importers.get(resolved)!;
-          importer.links.add(child)
-          child.parents.add(importer)
+          // TODO: unnecessary
+          // const child = importers.get(resolved)!;
+          // importer.links.add(child)
+          // child.parents.add(importer)
         }
       })
       firstStep.missing.forEach(missing => {
